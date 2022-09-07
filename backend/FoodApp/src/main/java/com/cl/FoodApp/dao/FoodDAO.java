@@ -29,7 +29,6 @@ public class FoodDAO {
 		if(old_food == null) {
 			throw new IdNotFoundException();
 		}else {
-			System.out.println(food.getFoodOrder());
 			old_food.setId(food.getId());
 			old_food.setImageURL(food.getImageURL());
 			if(food.getFoodOrder() != null) {

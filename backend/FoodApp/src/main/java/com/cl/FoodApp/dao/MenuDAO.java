@@ -20,8 +20,9 @@ public class MenuDAO {
 	}
 	
 	public void deleteMenu(int id) {
-		Menu Menu = repository.findById(id).orElse(null);
-		repository.delete(Menu);
+		Menu menu = repository.findById(id).orElse(null);
+		System.out.println(menu.getId());
+		repository.delete(menu);
 		return;
 	}
 	

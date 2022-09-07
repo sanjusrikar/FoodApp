@@ -30,15 +30,20 @@ public class FoodOrderService {
 		return new ResponseEntity<ResponseStructure<FoodOrder>>(structure,HttpStatus.CREATED);
 	}
 	
-	public void deleteFoodOrder(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteFoodOrder(int id) {
+		ResponseStructure<String> structure = new ResponseStructure<String>();
+		structure.setMessage("Order successfully deleted");
+		structure.setStatus(HttpStatus.OK.value());
 		dao.deleteFoodOrder(id);
+		structure.setR("Order Deleted");
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.OK);
 	}
 	
 	public FoodOrder addItems(int id , List<Food> foods) {
 		FoodOrder placedOrder = dao.findById(id);
 		int cost = 0;
 		for(Food food : foods) {
-			cost += food.Price;
+			cost += food.getPrice()*food.getChoosenQuantity();
 //			System.out.println(food.getName());
 			food.setFoodOrder(placedOrder);
 			fooddao.updateFood(food, food.getId());

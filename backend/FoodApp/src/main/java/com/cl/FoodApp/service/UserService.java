@@ -45,6 +45,28 @@ public class UserService {
 
 	@SuppressWarnings("static-access")
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user) {
+		
+		
+		User user1 = dao.findByEmail(user.getEmail());
+		
+		if(user1 != null) {
+			String ePassword1 = aes.encrypt(user.getPassword(), "SECRET");
+			if(user1.getPassword().contentEquals(ePassword1)) {
+				ResponseStructure<User> structure = new ResponseStructure<User>();
+				structure.setMessage("Successful login");
+				structure.setStatus(HttpStatus.ALREADY_REPORTED.value());
+				structure.setR(user1);
+				return new ResponseEntity<ResponseStructure<User>>(structure,HttpStatus.ALREADY_REPORTED);
+			}
+			ResponseStructure<User> structure = new ResponseStructure<User>();
+			structure.setMessage("Wrong Email or Password");
+			structure.setStatus(HttpStatus.GONE .value());
+			structure.setR(null);
+			return new ResponseEntity<ResponseStructure<User>>(structure,HttpStatus.GONE);
+			
+
+		}
+		
 
 		String ePassword = aes.encrypt(user.getPassword(), "SECRET");
 		user.setPassword(ePassword);
@@ -60,7 +82,7 @@ public class UserService {
 			user.setRole(Role.STAFF);
 		}
 		ResponseStructure<User> structure = new ResponseStructure<User>();
-		structure.setMessage("User successfully saved");
+		structure.setMessage("User successfully saved and Registered");
 		structure.setStatus(HttpStatus.CREATED.value());
 		structure.setR(dao.saveUser(user));
 		return new ResponseEntity<ResponseStructure<User>>(structure,HttpStatus.CREATED);
@@ -127,17 +149,20 @@ public class UserService {
 		return dao.findAll();
 	}
 
-	public int placeOrder(int id, FoodOrder order ) {
+	public ResponseEntity<ResponseStructure<FoodOrder>> placeOrder(int id, FoodOrder order ) {
 
 		User user = dao.findById(id);
 		Long datetime = System.currentTimeMillis();
 		Timestamp timestamp = new Timestamp(datetime);
+		ResponseStructure<FoodOrder> structure = new ResponseStructure<FoodOrder>();
 		if (user.getRole() == Role.STAFF) {
 			order.setUser(user);
 			order.setStatus(Status.WAITING);
 			order.setTimeStamp(timestamp);
-			FoodOrder placedOrder = orderdao.saveFoodOrder(order);
-			return placedOrder.getOrder_Id();
+			structure.setMessage("Order Created Successfully");
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setR(orderdao.saveFoodOrder(order));
+			return new ResponseEntity<ResponseStructure<FoodOrder>>(structure,HttpStatus.OK);
 
 		} else {
 			throw new NotAuthorizedException();
@@ -165,8 +190,8 @@ public class UserService {
 		double gst = 0.18;
 		double price_after_tax =  (total_price - total_price*gst);
 		String subject = "BILLING INFORMATION";
-		String msg = "Hello ," +"/rOrder placed /n" +
-				"/r/nTotal Amount is Rs." + price_after_tax + " Tax amount is Rs."+total_price*gst;
+		String msg = "Hello ," +" Order placed " +
+				"Total Amount is Rs." + price_after_tax + " Tax amount is Rs."+total_price*gst;
 		// add items ordered later
 		this.emailSenderService.sendEmail(email, subject, msg);
 

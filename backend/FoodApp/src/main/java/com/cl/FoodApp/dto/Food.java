@@ -24,7 +24,14 @@ public class Food {
 	public int Price;
 	public String description;
 	public food_type type;
-    public String getDescription() {
+	private int choosenQuantity = 0 ;
+    public int getChoosenQuantity() {
+		return choosenQuantity;
+	}
+	public void setChoosenQuantity(int choosenQuantity) {
+		this.choosenQuantity = choosenQuantity;
+	}
+	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {

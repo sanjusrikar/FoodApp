@@ -28,36 +28,32 @@ public class UserController {
 	MenuService menuservice;
 	
 
-
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/saveUser")
 	public ResponseEntity<ResponseStructure<User>>  saveUser(@RequestBody User user) {
 		return service.saveUser(user);
 
 	}
-    
+	@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/sendMail/{id}")
     public ResponseEntity<String> sendEmail(@PathVariable int id) {
         service.sendBill(id);
         return ResponseEntity.ok("Success");
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/placeOrder/{id}")
-	public String placeOrder(@RequestBody FoodOrder foodOrder,@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<FoodOrder>> placeOrder(@RequestBody FoodOrder foodOrder,@PathVariable int id) {
 		// calculate total_price
 
-		int order_id = service.placeOrder(id, foodOrder);
-		if (order_id != -1) {
-			return "Order " + order_id + " Placed !!";
-		}
-		return "Order not Placed !!";
+		return service.placeOrder(id, foodOrder);
 
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/addItemsToOrder/{id}")
 	public FoodOrder addItemsToOrder(@RequestBody List<Food> foods , @PathVariable int id) {
 		return orderservice.addItems(id, foods);
 	}
-
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/readyOrder/{id}")
 	public String readyOrder(@PathVariable int id) {
 		// calculate total_price
@@ -69,27 +65,29 @@ public class UserController {
 
 		
 	}
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/createMenu/{id}")
 	public ResponseEntity<ResponseStructure<Menu>> createMenu(@RequestBody Menu menu ,@PathVariable int id ){
 		return service.createMenu(id, menu);
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/addItemsToMenu/{id}")
 	public ResponseEntity<ResponseStructure<Menu>> addItemsToMenu(@RequestBody List<Food> foods , @PathVariable int id){
 		return menuservice.addItemsToMenu(id, foods);
 	}
-
+	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/deleteUser/{id}")
 	public String deleteUser(@PathVariable int id) {
 		service.deleteUser(id);
 		return "User removed " + id;
 
 	}
-
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/getUserById/{id}")
 	public ResponseEntity<ResponseStructure<User>> getUserById(@PathVariable int id) {
 		return service.findById(id);
 	}
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/updateUser/{id}")
 	public ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user,@PathVariable int id){
 		return service.updateUser(user, id);

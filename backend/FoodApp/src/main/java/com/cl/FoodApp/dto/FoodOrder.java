@@ -22,7 +22,7 @@ public class FoodOrder {
 		WAITING, PREPARING, READY;
 	};
 	
-	@OneToMany(mappedBy = "foodOrder")
+	@OneToMany( mappedBy = "foodOrder")
 	@JsonIgnore
 	private List<Food> foods;
 	

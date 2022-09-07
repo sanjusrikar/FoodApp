@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Menu {
 	@Id
@@ -12,6 +14,7 @@ public class Menu {
 	// list of foods
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
 	List<Food> foods;
+	@JsonIgnore
 	@OneToOne
 	private User user;
 	

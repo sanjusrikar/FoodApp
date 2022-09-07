@@ -14,7 +14,7 @@ public class User {
 		STAFF , BRANCH_MANAGER , ADMIN;
 	};
 
-	private String Email;
+	private String email;
 	private String Password;
 	private String Branch;
 	
@@ -43,11 +43,12 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getPassword() {
 		return Password;

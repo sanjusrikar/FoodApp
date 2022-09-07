@@ -3,6 +3,7 @@ package com.cl.FoodApp.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cl.FoodApp.dto.User;
@@ -47,6 +48,10 @@ public class UserDAO {
 	
 	public User findById(int id) {
 		return repository.findById(id).orElse(null);
+	}
+	
+	public User findByEmail(String Email) {
+		return repository.findByEmail(Email);
 	}
 	
 	

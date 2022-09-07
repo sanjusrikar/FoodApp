@@ -41,7 +41,6 @@ public class MenuService {
 		}
 		createdMenu.setFoods(foods);
 		ResponseStructure<Menu> structure = new ResponseStructure<Menu>();
-		structure.setMessage("Items added successfully");
 		structure.setStatus(HttpStatus.OK.value());
 		structure.setR(dao.updateMenu(createdMenu, id));
 		return new ResponseEntity<ResponseStructure<Menu>>(structure,HttpStatus.OK);
