@@ -1,0 +1,45 @@
+<div class="container">
+   <div class="header">
+      <div class="mat-title"> Cart
+      </div>
+      <span class="spacer"></span>
+      <button mat-button mat-dialog-close  class="close">
+         <mat-icon>close</mat-icon>
+      </button>
+   </div>
+   <div class="body">
+      <div class="image" *ngIf="foods.length === 0">
+         <img
+            src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-cute-disappointed-shopping-bag-flat-thin-line-vector-id841884438?b=1&k=20&m=841884438&s=170667a&w=0&h=cmsC4f-WyIcgDIPNTjjXtam0kWoaAB6MJyIgrK0NaGE=">
+      </div>
+      <table mat-table [dataSource]="foods">
+         <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef>  Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="Quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.choosenQuantity}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.Price*element.choosenQuantity}} </td>
+         </ng-container>
+
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+   </div>
+   <div class="footer">
+      <button mat-button
+      (click) = "confirmOrder()"
+      mat-dialog-close
+      class="checkout" >
+         <mat-icon>checkout</mat-icon>
+      </button>
+   </div>
+
+
+</div>

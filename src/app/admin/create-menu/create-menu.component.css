@@ -1,0 +1,98 @@
+.grid-container {
+  margin: 20px;
+  /* overflow: auto; */
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin:auto;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  width: 80%;
+
+}
+mat-card img{
+  object-fit: contain; /*this makes the image in src fit to the size specified below*/
+  width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 50%;
+}
+.showMenu{
+  position: relative;
+  left: 50%;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+.mat-drawer-backdrop {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  display: block;
+  z-index: 3;
+  visibility: hidden;
+}
+
+
+
+.dashboard-card-content {
+  text-align: center;
+  overflow: auto;
+  height: 100%;
+}
+.food-header{
+  right: 15px;
+}
+.add-remove{
+  position: relative;
+
+  /* margin-top: 30px; */
+}
+
+.cartFooter{
+  position: absolute;
+  bottom: 0;
+  right: 500px;
+  width: 500px;
+
+}
+
+.sidenav-container {
+  height: 100%;
+  
+}
+.sidename{
+  background-color: gray;
+  color: white;
+  height: 64px;
+  text-align: center;
+  justify-content: center;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.remove{
+  position: relative;
+  top:100px;
+  left: 120px;
+}
+
+.sidenav {
+  width: 300px;
+}
+
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  background-color: gray;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+

@@ -1,0 +1,46 @@
+.grid-container {
+  margin: 20px;
+  /* overflow: auto; */
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin:auto;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  width: 80%;
+
+}
+mat-card img{
+  object-fit: contain; /*this makes the image in src fit to the size specified below*/
+  width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 50%;
+}
+
+
+
+.dashboard-card-content {
+  text-align: center;
+  overflow: auto;
+  height: 100%;
+}
+.food-header{
+  right: 15px;
+}
+.add-remove{
+  position: relative;
+
+  /* margin-top: 30px; */
+}
+
+.cartFooter{
+  position: absolute;
+  bottom: 0;
+  right: 500px;
+  width: 500px;
+
+}

@@ -1,0 +1,30 @@
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+
+body {
+    margin: 0;
+    background-color: gray;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.mat-slider-thumb-label {
+    transform: rotate(45deg) !important;
+    border-radius: 50% 50% 0% !important;
+    
+}
+
+ .mat-slider-thumb {
+    transform: scale(0) !important;
+    background-color: white;
+    border: solid 0px gray;
+}
+
+.mat-slider-thumb-label-text {
+    opacity: 1 !important;
+}
+

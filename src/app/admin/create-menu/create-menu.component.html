@@ -1,0 +1,78 @@
+
+<div class="grid-container">
+
+    <h1 class="mat-h1">Menu</h1>
+    <mat-grid-list cols="4" rowHeight="350px">
+      <mat-grid-tile *ngFor="let food of foods " [colspan]=1 [rowspan]=1>
+        <mat-card class="dashboard-card">
+          <mat-card-header class="food-header">
+            <mat-card-title>
+              {{food.name}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <img mat-card-sm-img [src]="food.imageURL" role="region">
+            <p class="mat-h3"> {{food.description}}
+            </p>
+            <div class="mat-body-2">Rs.{{food.Price}}</div>
+          </mat-card-content>
+          <mat-card-actions class="add-remove">
+            <button  mat-button (click)="add(food)">Add</button>
+            <!-- <mat-slider 
+            class="cdk-focused"
+            [step]="1"
+            [min] = "0"
+            [max] = "10" 
+            [tickInterval]="1"
+            aria-label="units"
+            [thumbLabel]="true"
+            ></mat-slider> -->
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  
+
+
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === true"
+          role= "dialog"
+          mode="side"
+          position="end"
+          opened="true">
+      <h2 class="sidename">Menu</h2> 
+      <mat-list *ngFor = "let food of items">
+        <mat-card> 
+          <mat-card-title>{{food.name}}</mat-card-title>
+          <mat-card-content>
+            {{food.description}}
+          </mat-card-content>
+          <mat-card-actions>
+            <button (click)="remove(food)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-list>
+
+      <mat-button-toggle class="remove" (click) = "createMenu()">
+        <mat-icon>check_circle</mat-icon>
+      </mat-button-toggle>
+  
+      </mat-sidenav>
+      <button
+      class ="showMenu"
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+       >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-sidenav-container>
+  
+  
+  </div>
